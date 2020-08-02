@@ -10,7 +10,7 @@ from application.forms import NoteForm, RegistrationForm, LoginForm
 @login_required
 def main_stock():
     stockData= main_stock.query.all()
-return render_template('main_stock.html', title='Stock List')
+    return render_template('main_stock.html', title='Stock List')
 
 
 
