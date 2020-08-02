@@ -33,7 +33,7 @@ class product(db.Model):
     product_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     brand = db.Column(db.String(30), nullable=False)
     category = db.Column(db.String(30), nullable=False)
-    size = db.Column(db.Integer(10), nullable=False)
+    size = db.Column(db.Integer, nullable=False)
     supplier_name = db.Column(db.String(100), nullable=False)
 
 
@@ -41,11 +41,11 @@ class product(db.Model):
 #bar table
 class bar(db.Model):
     stock_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    brand = db.Column(db.String(30), db.ForeignKey('product.brand_id'), nullable=False)
+    brand = db.Column(db.String, db.ForeignKey('product.brand_id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('product.product_id'), nullable=False)
     user = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False, unique=True)
     description = db.Column(db.String(500), nullable=False)
-    stock_amount = db.Column(db.Integer(10), nullable=False)
+    stock_amount = db.Column(db.Integer, nullable=False)
 
 #posts= db.realtionship('Posts', backref='author', lazy=True)
 
