@@ -35,7 +35,6 @@ class product(db.Model):
     category = db.Column(db.String(30), nullable=False)
     size = db.Column(db.Integer(10), nullable=False)
     supplier_name = db.Column(db.String(100), nullable=False)
-    price = 
 
 
 
