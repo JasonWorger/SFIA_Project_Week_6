@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
-from application.models import users
+from application.models import users, bar, product
 from flask_login import login_user, current_user, logout_user, login_required
 from application.forms import RegistrationForm, LoginForm
 
@@ -9,7 +9,7 @@ from application.forms import RegistrationForm, LoginForm
 @app.route('/main_stock')
 @login_required
 def main_stock():
-    stockData= main_stock.query.all()
+    stockData= bar.query.all()
     return render_template('main_stock.html', title='Stock List')
 
 
