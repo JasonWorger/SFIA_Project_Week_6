@@ -1,4 +1,4 @@
-from application import db
+from application import db, login_manager
 
 
 #Name of database: stocklist_db
@@ -12,13 +12,9 @@ class users(db.Model):
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(50), nullable=False)
 
-# class Users(db.Model, UserMixin):
-#     id = db.Column(db.Integer, primary_key=True)
-#     first_name = db.Column(db.String(30), nullable=False)
-#     last_name = db.Column(db.String(30), nullable=False)
-#     email = db.Column(db.String(150), nullable=False, unique=True)
-#     password = db.Column(db.String(500), nullable=False)
-#     stocklist = db.relationship('Stocklist', backref='stock', lazy=True)
+@login_manager.user_loader
+def load_user(id):
+    return users.query.get(int(id))   
 
     # def __repr__(self):
     #     return ''.join([
