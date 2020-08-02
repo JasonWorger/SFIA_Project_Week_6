@@ -1,7 +1,7 @@
 from application import db, login_manager
 
 
-#Name of database: stocklist_db
+#Name of database: stocklistdb
 
 # User table
 class users(db.Model):
