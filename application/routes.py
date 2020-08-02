@@ -52,7 +52,7 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for('insert_stock'))
+        return redirect(url_for('main_stock'))
     return render_template('register.html', title='Register', form=form)
 
 
