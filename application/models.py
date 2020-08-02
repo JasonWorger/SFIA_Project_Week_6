@@ -37,7 +37,7 @@ class product(db.Model):
 #bar table
 class bar(db.Model):
     stock_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    brand = db.Column(db.String, db.ForeignKey('product.brand'), nullable=False)
+    brand = db.Column(db.String(30), db.ForeignKey('product.brand'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('product.product_id'), nullable=False)
     user = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False, unique=True)
     description = db.Column(db.String(500), nullable=False)
