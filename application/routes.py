@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
-from application.models import users, bar, product
+from application.models import Users, Bar, Product
 from flask_login import login_user, current_user, logout_user, login_required
 from application.forms import RegistrationForm, LoginForm
 
@@ -9,7 +9,7 @@ from application.forms import RegistrationForm, LoginForm
 @app.route('/main_stock')
 @login_required
 def main_stock():
-    stockData= bar.query.all()
+    stockData= Bar.query.all()
     return render_template('main_stock.html', title='Stock List')
 
 
@@ -22,7 +22,7 @@ def login():
         return redirect(url_for('main_stock'))
     form = LoginForm()
     if form.validate_on_submit():
-        user=users.query.filter_by(email=form.email.data).first()
+        user=Users.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
@@ -42,7 +42,7 @@ def register():
     if form.validate_on_submit():
         hash_pw = bcrypt.generate_password_hash(form.password.data)
 
-        user = users(
+        user = Users(
             first_name=form.first_name.data,
             last_name=form.last_name.data,
             email=form.email.data,
