@@ -6,7 +6,7 @@ from application import db
 # User table
 class users(db.Model):
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_name = db.Column(db.String(30)), nullable=False)
+    user_name = db.Column(db.String(30), nullable=False)
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
