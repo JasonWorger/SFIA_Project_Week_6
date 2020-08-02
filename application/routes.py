@@ -22,7 +22,7 @@ def login():
         return redirect(url_for('main_stock'))
     form = LoginForm()
     if form.validate_on_submit():
-        user=Users.query.filter_by(email=form.email.data).first()
+        user=users.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
@@ -42,7 +42,7 @@ def register():
     if form.validate_on_submit():
         hash_pw = bcrypt.generate_password_hash(form.password.data)
 
-        user = Users(
+        user = users(
             first_name=form.first_name.data,
             last_name=form.last_name.data,
             email=form.email.data,
