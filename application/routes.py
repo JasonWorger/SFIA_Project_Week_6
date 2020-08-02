@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, request
 from application import app, db, bcrypt
-from application.models import Users
+from application.models import users
 from flask_login import login_user, current_user, logout_user, login_required
 from application.forms import RegistrationForm, LoginForm
 
