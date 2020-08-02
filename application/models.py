@@ -45,7 +45,7 @@ class bar(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('product.product_id'), nullable=False)
     user = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False, unique=True)
     description = db.Column(db.String(500), nullable=False)
-    stock amount = db.Column(db.Integer(10), nullable=False)
+    stock_amount = db.Column(db.Integer(10), nullable=False)
 
 #posts= db.realtionship('Posts', backref='author', lazy=True)
 
