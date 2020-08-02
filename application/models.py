@@ -1,7 +1,5 @@
 from application import db
-export DATABASE_URI="mysql+pymysql://root:root@35.234.144.68:3306/stocklistdb"
-export SECRET_KEY=afgjkajfbajkbcwabkfhjgakjhfkjahckjabwuhgfbiuawgf
-export TEST_SECRET_KEY=afgjkajfbajkbcwabkfhjgakjhfkjahckjabwuhgfbiuawgf
+
 
 #Name of database: stocklist_db
 
