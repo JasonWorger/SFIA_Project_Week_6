@@ -5,14 +5,14 @@ from flask_login import UserMixin
 def load_user(id):
     return Users.query.get(int(id))  
 
-# User table
+
 class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(500), nullable=False)
-    Bar= db.relationship('Bar', backref='id', lazy=True)
+    Bar= db.relationship('Bar', backref='usersid', lazy=True)
 
     def __repr__(self):
         return ''.join([
@@ -21,17 +21,16 @@ class Users(db.Model, UserMixin):
             'Name: ', self.first_name, ' ', self.last_name
         ])
 
-#stock table
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     brand = db.Column(db.String(30), nullable=False)
     category = db.Column(db.String(30), nullable=False)
+    size = db.Column(db.Float, nullable=False)
+    price = db.Column(db.Float, nullable=False)
     supplier_name = db.Column(db.String(100), nullable=False)
     Bar= db.relationship('Bar', backref='supplier', lazy=True)
 
 
-
-#bar table
 class Bar(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     brand = db.Column(db.String(30), nullable=False)
@@ -40,6 +39,3 @@ class Bar(db.Model):
     description = db.Column(db.String(500), nullable=False)
     stock_amount = db.Column(db.Integer, nullable=False)
 
-#posts= db.relationship('Posts', backref='author', lazy=True)
-
-#user_id = db.Columns(db.Integer, db.Foreigney('users.id'), nullable=False)
