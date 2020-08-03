@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 from application.models import Users
 from flask_login import current_user
 
-
+# LINE 111 CODE NEEDS TO BE EDITED!
 
 class StockForm(FlaskForm):
     title = StringField('Title',
@@ -96,10 +96,38 @@ class UpdateAccountForm(FlaskForm):
             DataRequired(),
             Email()
         ])
-    submit = SubmitField('Update')
+    submit = SubmitField('Update Account')
 
     def validate_email(self,email):
         if email.data != current_user.email:
             user = Users.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('Email already in use')
+
+
+
+
+
+# Need to edit below!
+
+# class PostForm(FlaskForm):
+#     name = StringField('Name',
+#         validators = [
+#             DataRequired(),
+#             Length(min=2, max=100)
+#         ]
+#     )
+#     style = SelectField('Style',choices=[('Longboard','Longboard'),('Shortboard','Shortboard'),('Fish','Fish'),('Minimall','Minimall')])
+#     volume = DecimalField('Volume', places=2)
+#     size = DecimalField('Size', places=1)
+#     price = DecimalField('Price', places=2)
+#     stock = IntegerField('Stock')
+#     submit = SubmitField('Post!')
+
+# class updateBoardForm(FlaskForm):
+#     stock = IntegerField('Quantity')
+#     submit = SubmitField('Update')
+
+# class OrdersForm(FlaskForm):
+#     quantity = IntegerField('Quantity')
+#     submit = SubmitField('Checkout')

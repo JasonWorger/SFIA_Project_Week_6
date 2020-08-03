@@ -1,2 +1,17 @@
-<!-- this is a very simple html file to demonstrate the template functionality -->
-<h1>{{ title }}</h1>
+
+#The below needs to be changed!
+
+
+{% extends 'layout.html' %}
+{% block body_content %}
+    <h1>Home Page</h1>
+<p>Welcome to this web app!</p>
+{% for post in posts %}
+    <div>
+        <h3>{{ post.title }}</h3>
+        <span>by <i>{{ post.author.first_name }} {{ post.author.last_name }}</i></span>
+        <span>on the <i>{{ post.date_posted }}</i></span>
+        <p>{{ post.content }}</p>
+    </div>
+{% endfor %}
+{% endblock %}
