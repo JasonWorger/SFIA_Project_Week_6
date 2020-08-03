@@ -12,7 +12,7 @@ class Users(db.Model, UserMixin):
     last_name = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(500), nullable=False)
-    Bar= db.relationship('main_stock', backref='id', lazy=True)
+    Bar= db.relationship('Bar', backref='id', lazy=True)
 
     def __repr__(self):
         return ''.join([
