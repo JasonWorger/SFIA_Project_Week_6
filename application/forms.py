@@ -1,10 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, BooleanField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, SelectField, DecimalField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from application.models import Users
 from flask_login import current_user
 
-# LINE 111 CODE NEEDS TO BE EDITED!
 
 class StockForm(FlaskForm):
     title = StringField('Title',
@@ -105,29 +104,19 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError('Email already in use')
 
 
+class StockData(FlaskForm):
+    name = StringField('Name',
+        validators = [
+            DataRequired(),
+            Length(min=2, max=100)
+        ]
+    )
+    size = DecimalField('Size', places=1)
+    price = DecimalField('Price', places=2)
+    stock_amount = IntegerField('Stock')
+    submit = SubmitField('Post!')
 
+class updateStockForm(FlaskForm):
+    stock_amount = IntegerField('Quantity')
+    submit = SubmitField('Update')
 
-
-# Need to edit below!
-
-# class PostForm(FlaskForm):
-#     name = StringField('Name',
-#         validators = [
-#             DataRequired(),
-#             Length(min=2, max=100)
-#         ]
-#     )
-#     style = SelectField('Style',choices=[('Longboard','Longboard'),('Shortboard','Shortboard'),('Fish','Fish'),('Minimall','Minimall')])
-#     volume = DecimalField('Volume', places=2)
-#     size = DecimalField('Size', places=1)
-#     price = DecimalField('Price', places=2)
-#     stock = IntegerField('Stock')
-#     submit = SubmitField('Post!')
-
-# class updateBoardForm(FlaskForm):
-#     stock = IntegerField('Quantity')
-#     submit = SubmitField('Update')
-
-# class OrdersForm(FlaskForm):
-#     quantity = IntegerField('Quantity')
-#     submit = SubmitField('Checkout')

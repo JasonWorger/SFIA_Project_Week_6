@@ -12,7 +12,7 @@ class Users(db.Model, UserMixin):
     last_name = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(500), nullable=False)
-    Bar= db.relationship('Bar', backref='usersid', lazy=True)
+    bar= db.relationship('Bar', backref='usersid', lazy=True)
 
     def __repr__(self):
         return ''.join([
@@ -28,14 +28,14 @@ class Product(db.Model):
     size = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float, nullable=False)
     supplier_name = db.Column(db.String(100), nullable=False)
-    Bar= db.relationship('Bar', backref='supplier', lazy=True)
+    bar= db.relationship('Bar', backref='supplier', lazy=True)
 
 
 class Bar(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     brand = db.Column(db.String(30), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
-    user = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False, unique=True)
+    user = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     description = db.Column(db.String(500), nullable=False)
     stock_amount = db.Column(db.Integer, nullable=False)
 
