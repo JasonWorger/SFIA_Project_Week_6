@@ -1,26 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField, BooleanField, SelectField, DecimalField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from application.models import Users
+from application.models import Users, Product, Stock
 from flask_login import current_user
 
 
-class StockForm(FlaskForm):
-    title = StringField('Title',
-        validators = [
-            DataRequired(),
-            Length(min=2, max=100)
-        ]
-    )
-    content = StringField('TItle',
-        validators = [
-            DataRequired(),
-            Length(min=2, max=500)
-        ]
-    )
-    submit = SubmitField('Post!')
-
-
+#This is the registration form
 class RegistrationForm(FlaskForm):
     
     first_name = StringField('First Name',
@@ -61,6 +46,7 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError('Email already in use')
 
+#This is the login form
 class LoginForm(FlaskForm):
     email = StringField('Email',
         validators=[
@@ -79,6 +65,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
+#This is the update account form
 class UpdateAccountForm(FlaskForm):
     first_name = StringField('First Name',
         validators=[
@@ -104,19 +91,34 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError('Email already in use')
 
 
-class StockData(FlaskForm):
-    name = StringField('Name',
-        validators = [
-            DataRequired(),
-            Length(min=2, max=100)
-        ]
-    )
-    size = DecimalField('Size', places=1)
-    price = DecimalField('Price', places=2)
-    stock_amount = IntegerField('Stock')
-    submit = SubmitField('Post!')
 
-class updateStockForm(FlaskForm):
-    stock_amount = IntegerField('Quantity')
-    submit = SubmitField('Update')
+#Add Product Form
+class AddProduct(FlaskForm):
+    product_name = StringField("Product Name", validators = [DataRequired()])
+    product_category = StringField("Type Of Drink", validators = [Length(min=0, max=100)])
+    size = StringField("Product Size", validators = [DataRequired()])
+    price = DecimalField("Price, places=2)
+    submit = SubmitField("Add Product")"
 
+    def validate_product_exists(self, product_name):
+        product_name = Product.query.filter_by(product_name=product_name.data).first()
+        if product_name is not None:
+            raise ValidationError("This product has already been added. Please enter a new product.")
+
+
+
+#Add Bar Stock Form
+class AddStock(FlaskForm):
+    product_name = StringField("Product Name", validators = [DataRequired()])
+    quantity = IntegerField("Stock Quantity")
+    submit = SubmitField("Add Stock")
+
+    def validate_product_exists(self, product_name):
+        product_name = Product.query.filter_by(product_name=product_name.data).first()
+        if product_name is not None:
+            raise ValidationError("Unable to add stock as product does not exist. Please add the product")
+
+
+#Edit Product Form
+
+#Edit Stock Form

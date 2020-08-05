@@ -12,8 +12,7 @@ class Users(db.Model, UserMixin):
     last_name = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(500), nullable=False)
-    bar= db.relationship('Bar', backref='usersid', lazy=True)
-
+   
     def __repr__(self):
         return ''.join([
             'User ID: ', str(self.id), '\r\n',
@@ -22,20 +21,23 @@ class Users(db.Model, UserMixin):
         ])
 
 class Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    brand = db.Column(db.String(30), nullable=False)
-    category = db.Column(db.String(30), nullable=False)
-    size = db.Column(db.Float, nullable=False)
+    product_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    product_name = db.Column(db.String(50), nullable=False, unique = True)
+    product_category = db.Column(db.String(30), nullable=False)
     price = db.Column(db.Float, nullable=False)
-    supplier_name = db.Column(db.String(100), nullable=False)
-    bar= db.relationship('Bar', backref='supplier', lazy=True)
+    size = db.Column(db.Integer, nullable=False)
+    stock = db.relationship('Stock', backref='product', lazy=True)
 
 
-class Bar(db.Model):
+    def __repr__(self):
+        return "<Product: {}>\n\r".format(self.product_name), "<Product Price: {}\n\r".format(self.price)
+
+
+class Stock(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    brand = db.Column(db.String(30), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
-    user = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    description = db.Column(db.String(500), nullable=False)
-    stock_amount = db.Column(db.Integer, nullable=False)
-
+    product_id = db.Column(db.Integer, db.ForeignKey('product.product_id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    def __repr__(self):
+        output = "<Bar Stock: {}\n\r".format(self.product_id),
+        "<Quantity: {}\n\r".format(self.quantity)
+        return output

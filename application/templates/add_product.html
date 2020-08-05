@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body_content %}
+<div class='form'>
+    <p>Product List</p>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.product_name.label }}<br>
+            {{ form.product_name(size=32) }}<br>
+        </p>
+        <p>
+            {{ form.product_category.label }}<br>
+            {{ form.product_category(size=32) }}<br>
+        </p>
+        <p>
+            {{ form.size.label }}<br>
+            {{ form.size(size=32) }}<br>
+        </p>
+        <p>
+            {{ form.price.label }}<br>
+            {{ form.price(size=16) }}<br>
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+{% endblock %}
