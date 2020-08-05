@@ -79,5 +79,5 @@ def add_stock():
         )
         db.session.add(stock_to_add)
         db.session.commit()
-    return render_template('main_stock.html', title='Add Stock', form=form)
+    return render_template('add_stock.html', title='Add Stock', form=form)
 
