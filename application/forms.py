@@ -97,8 +97,8 @@ class AddProduct(FlaskForm):
     product_name = StringField("Product Name", validators = [DataRequired()])
     product_category = StringField("Type Of Drink", validators = [Length(min=0, max=100)])
     size = StringField("Product Size", validators = [DataRequired()])
-    price = DecimalField("Price, places=2)
-    submit = SubmitField("Add Product")"
+    price = DecimalField("Price")
+    submit = SubmitField("Add Product")
 
     def validate_product_exists(self, product_name):
         product_name = Product.query.filter_by(product_name=product_name.data).first()
