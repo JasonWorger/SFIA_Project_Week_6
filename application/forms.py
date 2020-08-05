@@ -5,7 +5,7 @@ from application.models import Users, Product, Stock
 from flask_login import current_user
 
 
-#This is the registration form
+
 class RegistrationForm(FlaskForm):
     
     first_name = StringField('First Name',
@@ -46,7 +46,7 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError('Email already in use')
 
-#This is the login form
+
 class LoginForm(FlaskForm):
     email = StringField('Email',
         validators=[
@@ -65,7 +65,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
-#This is the update account form
+
 class UpdateAccountForm(FlaskForm):
     first_name = StringField('First Name',
         validators=[
@@ -92,7 +92,7 @@ class UpdateAccountForm(FlaskForm):
 
 
 
-#Add Product Form
+
 class AddProduct(FlaskForm):
     product_name = StringField("Product Name", validators = [DataRequired()])
     product_category = StringField("Type Of Drink", validators = [Length(min=0, max=100)])
@@ -107,7 +107,6 @@ class AddProduct(FlaskForm):
 
 
 
-#Add Bar Stock Form
 class AddStock(FlaskForm):
     product_name = StringField("Product Name", validators = [DataRequired()])
     quantity = IntegerField("Stock Quantity")
@@ -119,6 +118,11 @@ class AddStock(FlaskForm):
             raise ValidationError("Unable to add stock as product does not exist. Please add the product")
 
 
-#Edit Product Form
 
-#Edit Stock Form
+class UpdateProduct(FlaskForm):
+    product_name = StringField("Product Name", validators = [DataRequired()])
+    product_category = StringField("Type Of Drink", validators = [Length(min=0, max=100)])
+    size = StringField("Product Size", validators = [DataRequired()])
+    price = DecimalField("Price")
+    submit = SubmitField("Update Product")
+
