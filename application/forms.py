@@ -100,7 +100,7 @@ class AddProduct(FlaskForm):
     price = DecimalField("Price")
     submit = SubmitField("Add Product")
 
-    def validate_product_exists(self, product_name):
+    def validate_product_name(self, product_name):
         product_name = Product.query.filter_by(product_name=product_name.data).first()
         if product_name is not None:
             raise ValidationError("This product has already been added. Please enter a new product.")
@@ -113,7 +113,7 @@ class AddStock(FlaskForm):
     quantity = IntegerField("Stock Quantity")
     submit = SubmitField("Add Stock")
 
-    def validate_product_exists(self, product_name):
+    def validate_product_name(self, product_name):
         product_name = Product.query.filter_by(product_name=product_name.data).first()
         if product_name is not None:
             raise ValidationError("Unable to add stock as product does not exist. Please add the product")
