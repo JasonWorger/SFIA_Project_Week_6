@@ -7,16 +7,10 @@
         <p>
             {{ form.product_name.label }}<br>
             {{ form.product_name(size=25) }}<br>
-            {% for error in form.product_name.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
         </p>
         <p>
             {{ form.quantity.label }}<br>
             {{ form.quantity(size=10) }}<br>
-            {% for error in form.quantity.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
     </form>
