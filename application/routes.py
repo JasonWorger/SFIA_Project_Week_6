@@ -88,6 +88,8 @@ def addStock():
         db.session.add(stock_to_add)
         db.session.commit()
         return redirect(url_for("main_stock"))
+    else:
+        print(form.errors)
     return render_template('addStock.html', title='Add Stock', form=form)
 
 
