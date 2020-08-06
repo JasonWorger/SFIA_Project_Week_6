@@ -70,6 +70,9 @@ def add_product():
         )
         db.session.add(product_to_add)
         db.session.commit()
+        return redirect(url_for('main_stock'))
+    else:
+        print(form.errors)
     return render_template('addProduct.html', title='Add Product', form=form)
 
 #Adding Stock
