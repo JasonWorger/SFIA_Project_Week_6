@@ -54,7 +54,7 @@ def logout():
 
 
 #Adding Product
-@app.route("/addProduct", methods=['GET', 'POST'])
+@app.route("/add_product", methods=['GET', 'POST'])
 def add_product():
     form = AddProduct()
     if form.validate_on_submit():
@@ -69,7 +69,7 @@ def add_product():
     return render_template('add_product.html', title='Add Product', form=form)
 
 #Adding Stock
-@app.route("/addStock", methods=['GET', 'POST'])
+@app.route("/add_stock", methods=['GET', 'POST'])
 def add_stock():
     form = AddStock()
     if form.validate_on_submit():
@@ -83,7 +83,7 @@ def add_stock():
 
 
 #Updating Product
-@app.route("/updateProduct", methods = ["GET", "POST"])
+@app.route("/update_product", methods = ["GET", "POST"])
 @login_required
 def updateProduct(product_id):
 	product = Product.query.filter_by(product_id = product_id).first()
@@ -104,7 +104,7 @@ def updateProduct(product_id):
 
 
 #Updating Stock
-@app.route("/updateStock", methods = ["GET", "POST"])
+@app.route("/update_stock", methods = ["GET", "POST"])
 @login_required
 def updateStock(product_name):
 	stock = Stock.query.filter_by(product_name = product_name).first()
@@ -127,7 +127,7 @@ def delete_product(product_id):
 		product = Product.query.filter_by(product_id = product_id).first()
 		db.session.delete(product)
 		db.session.commit
-		return redirect(url_for("add_product"))
+		return redirect(url_for("addProduct"))
 
 
 
