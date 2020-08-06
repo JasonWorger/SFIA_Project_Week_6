@@ -91,8 +91,7 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError('Email already in use')
 
 
-
-
+#Adding a product
 class AddProduct(FlaskForm):
     product_name = StringField("Product Name", validators = [DataRequired()])
     product_category = StringField("Type Of Drink", validators = [Length(min=0, max=100)])
@@ -106,7 +105,7 @@ class AddProduct(FlaskForm):
             raise ValidationError("This product has already been added. Please enter a new product.")
 
 
-
+#Adding stock of a product
 class AddStock(FlaskForm):
     product_name = StringField("Product Name", validators = [DataRequired()])
     quantity = IntegerField("Stock Quantity")
@@ -118,7 +117,7 @@ class AddStock(FlaskForm):
             raise ValidationError("Unable to add stock as product does not exist. Please add the product")
 
 
-
+#Updating a product
 class UpdateProduct(FlaskForm):
     product_name = StringField("Product Name", validators = [DataRequired()])
     product_category = StringField("Type Of Drink", validators = [Length(min=0, max=100)])
@@ -126,3 +125,22 @@ class UpdateProduct(FlaskForm):
     price = DecimalField("Price")
     submit = SubmitField("Update Product")
 
+    def validate_product_name(self, product_name):
+        product_name = Product.query.filter_by(product_name=product_name.data).first()
+        if product_name is None:
+            raise ValidationError("This product does not exist to update. Please create product.")
+
+
+#Updating the stock quantity of a product
+class UpdateStock(FlaskForm):
+    product_name = StringField("Product Name", validators = [DataRequired()])
+    quantity = IntegerField("Stock Quantity")
+    submit = SubmitField("Update Stock")
+    
+    def validate_product_name(self, product_name):
+        product_name = Product.query.filter_by(product_name=product_name.data).first()
+        if product_name is None:
+            raise ValidationError("Unable to update stock. Please add stock first.")
+
+#Deleting a product or stock????
+class DeleteProduct(FlaskForm):
