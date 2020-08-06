@@ -13,7 +13,7 @@ from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, Ad
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('add_product'))
+        return redirect(url_for('addProduct'))
     form = LoginForm()
     if form.validate_on_submit():
         user=Users.query.filter_by(email=form.email.data).first()
@@ -46,7 +46,7 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for('add_product'))
+        return redirect(url_for('addProduct'))
     return render_template('register.html', title='Register', form=form)
 
 #This is the logout route
