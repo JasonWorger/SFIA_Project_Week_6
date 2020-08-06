@@ -3,11 +3,11 @@
 	<body>
 	<div class=navbar>
 		{% if current_user.is_authenticated %}
-			<a href="{{ url_for('main_stock') }}">Stock List</a>
-			<a href="{{ url_for('add_stock') }}">Add Stock</a>
-			<a href="{{ url_for('add_product') }}">Add Product</a>
-			<a href="{{ url_for('update_product') }}">Update Product</a>
-			<a href="{{ url_for('update_stock') }}">Update Stock</a>
+			<a href="{{ url_for('mainStock') }}">Stock List</a>
+			<a href="{{ url_for('addStock') }}">Add Stock</a>
+			<a href="{{ url_for('addProduct') }}">Add Product</a>
+			<a href="{{ url_for('updateProduct') }}">Update Product</a>
+			<a href="{{ url_for('updateStock') }}">Update Stock</a>
 			<a href="{{ url_for('logout') }}">Logout</a>
 			
 			

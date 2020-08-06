@@ -59,7 +59,7 @@ def logout():
 #Adding Product
 @app.route("/addProduct", methods=['GET', 'POST'])
 @login_required
-def add_product():
+def addProduct():
     form = AddProduct()
     if form.validate_on_submit():
         product_to_add = Product(
@@ -78,7 +78,7 @@ def add_product():
 #Adding Stock
 @app.route("/addStock", methods=['GET', 'POST'])
 @login_required
-def add_stock():
+def addStock():
     form = AddStock()
     if form.validate_on_submit():
         stock_to_add = Stock(
@@ -130,7 +130,7 @@ def updateStock(product_name):
 #Deleting a product
 @app.route("/product/delete/<product_id>")
 @login_required
-def delete_product(product_id):
+def deleteProduct(product_id):
 	if current_user.is_authenticated:
 		product = Product.query.filter_by(product_id = product_id).first()
 		db.session.delete(product)
