@@ -83,9 +83,9 @@ def add_stock():
 
 
 #Updating Product
-@app.route("/update_product/<product_id>", methods = ["GET", "POST"])
+@app.route("/updateProduct", methods = ["GET", "POST"])
 @login_required
-def update_product(product_id):
+def updateProduct(product_id):
 	product = Product.query.filter_by(product_id = product_id).first()
 	form = UpdateProduct()
 	if form.validate_on_submit():
@@ -94,30 +94,32 @@ def update_product(product_id):
 		product.size = form.size.data
 		product.price = form.price.data
 		db.session.commit()
-		return redirect(url_for("update_product", product_id = product_id))
+		return redirect(url_for("updateProduct", product_id = product_id))
 	elif request.method == "GET":
 		form.product_name.data = product.product_name
 		form.product_category.data = product.product_category
 		form.size.data = product.size
 		form.price.data = product.price
-	return render_template("stock/update_product.html", title = "Update Product", form = form)
+	return render_template("updateProduct.html", title = "Update Product", form = form)
 
-@app.route("/update_stock/<product_name>", methods = ["GET", "POST"])
+
+#Updating Stock
+@app.route("/updateStock", methods = ["GET", "POST"])
 @login_required
-def update_stock(product_name):
+def updateStock(product_name):
 	stock = Stock.query.filter_by(product_name = product_name).first()
 	form = UpdateStock()
 	if form.validate_on_submit():
 		stock.product_name = form.product_name.data
 		stock.quantity = form.quantity.data
 		db.session.commit()
-		return redirect(url_for("update_stock", product_name = product_name))
+		return redirect(url_for("updateStock", product_name = product_name))
 	elif request.method == "GET":
 		form.product_name.data = stock.product_name
 		form.quantity.data = stock.quantity
-	return render_template("stock/update_stock.html", title = "Update Stock", form = form)
+	return render_template("updateStock.html", title = "Update Stock", form = form)
 
-
+#Deleting a product
 @app.route("/product/delete/<product_id>")
 @login_required
 def delete_product(product_id):

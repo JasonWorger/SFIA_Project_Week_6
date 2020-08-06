@@ -142,4 +142,5 @@ class UpdateStock(FlaskForm):
         if product_name is None:
             raise ValidationError("Unable to update stock. Please add stock first.")
 
-#Deleting a product or stock????
+
+#Deleting a product????
