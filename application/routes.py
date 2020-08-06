@@ -6,7 +6,10 @@ from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, Ad
 
 
 
+
+
 #This is the login route
+@app.route('/')
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -132,7 +135,6 @@ def delete_product(product_id):
 
 
 @app.route("/main_stock")
-@login_required
 def main_stock():
     StockData= Stock.query.all()
     return render_template('main_stock.html', "My Stock", Stock=StockData)
