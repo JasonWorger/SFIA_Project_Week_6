@@ -91,7 +91,7 @@ def addStock():
 
 
 #Updating Product
-@app.route("/updateProduct/<product.id>", methods = ["GET", "POST"])
+@app.route("/updateProduct/<product_id>", methods = ["GET", "POST"])
 @login_required
 def updateProduct(product_id):
 	product = Product.query.filter_by(product_id = product_id).first()
