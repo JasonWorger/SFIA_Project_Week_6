@@ -82,11 +82,12 @@ def addStock():
     form = AddStock()
     if form.validate_on_submit():
         stock_to_add = Stock(
-            product_id = Product.query.filter_by(product_name=form.product_name.data).first(),
+            product = Product.query.filter_by(product_name=form.product_name.data).first(),
             quantity = form.quantity.data
         )
         db.session.add(stock_to_add)
         db.session.commit()
+        return redirect(url_for("main_stock"))
     return render_template('addStock.html', title='Add Stock', form=form)
 
 
