@@ -142,4 +142,4 @@ def deleteProduct(product_id):
 @app.route("/main_stock")
 def main_stock():
     StockData= Stock.query.all()
-    return render_template('main_stock.html', "My Stock", Stock=StockData)
+    return render_template('main_stock.html', title = "My Stock", Stock=StockData)
