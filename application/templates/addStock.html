@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 
 {% block body_content %}
-<div class='form'>
     <h2>Add Stock</h2>
     <form action="" method="post">
         {{ form.hidden_tag() }}
@@ -15,5 +14,4 @@
         </p>
         <p>{{ form.submit() }}</p>
     </form>
-</div>
 {% endblock %}

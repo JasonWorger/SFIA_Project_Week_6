@@ -108,7 +108,7 @@ class AddProduct(FlaskForm):
 #Adding stock of a product
 class AddStock(FlaskForm):
     product_name = StringField("Product Name", validators = [DataRequired()])
-    quantity = IntegerField("Stock Quantity")
+    quantity = IntegerField("Stock Quantity", validators = [DataRequired()])
     submit = SubmitField("Add Stock")
 
     def validate_product_name(self, product_name):
