@@ -26,7 +26,7 @@ class Product(db.Model):
     product_category = db.Column(db.String(30), nullable=False)
     price = db.Column(db.Float, nullable=False)
     size = db.Column(db.Integer, nullable=False)
-    stock = db.relationship('Stock', backref='product', lazy= "dynamic")
+    stock = db.relationship('Stock', backref='product', lazy= True)
 
 
     def __repr__(self):
