@@ -58,6 +58,7 @@ def logout():
 
 #Adding Product
 @app.route("/addProduct", methods=['GET', 'POST'])
+@login_required
 def add_product():
     form = AddProduct()
     if form.validate_on_submit():
@@ -73,6 +74,7 @@ def add_product():
 
 #Adding Stock
 @app.route("/addStock", methods=['GET', 'POST'])
+@login_required
 def add_stock():
     form = AddStock()
     if form.validate_on_submit():
