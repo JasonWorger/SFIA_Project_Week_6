@@ -23,7 +23,7 @@ def login():
             if next_page:
                 return redirect(next_page)
             else:
-                return redirect(url_for('add_product'))
+                return redirect(url_for('register'))
     return render_template('login.html', title='Login', form=form)
 
 
@@ -31,7 +31,7 @@ def login():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('add_product'))
+        return redirect(url_for('login'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hash_pw = bcrypt.generate_password_hash(form.password.data)
@@ -57,7 +57,7 @@ def logout():
 
 
 #Adding Product
-@app.route("/add_product", methods=['GET', 'POST'])
+@app.route("/addProduct", methods=['GET', 'POST'])
 def add_product():
     form = AddProduct()
     if form.validate_on_submit():
