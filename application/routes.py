@@ -69,10 +69,10 @@ def add_product():
         )
         db.session.add(product_to_add)
         db.session.commit()
-    return render_template('add_product.html', title='Add Product', form=form)
+    return render_template('addProduct.html', title='Add Product', form=form)
 
 #Adding Stock
-@app.route("/add_stock", methods=['GET', 'POST'])
+@app.route("/addStock", methods=['GET', 'POST'])
 def add_stock():
     form = AddStock()
     if form.validate_on_submit():
@@ -82,11 +82,11 @@ def add_stock():
         )
         db.session.add(stock_to_add)
         db.session.commit()
-    return render_template('add_stock.html', title='Add Stock', form=form)
+    return render_template('addStock.html', title='Add Stock', form=form)
 
 
 #Updating Product
-@app.route("/update_product", methods = ["GET", "POST"])
+@app.route("/updateProduct", methods = ["GET", "POST"])
 @login_required
 def updateProduct(product_id):
 	product = Product.query.filter_by(product_id = product_id).first()
@@ -107,7 +107,7 @@ def updateProduct(product_id):
 
 
 #Updating Stock
-@app.route("/update_stock", methods = ["GET", "POST"])
+@app.route("/updateStock", methods = ["GET", "POST"])
 @login_required
 def updateStock(product_name):
 	stock = Stock.query.filter_by(product_name = product_name).first()

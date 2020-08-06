@@ -144,3 +144,5 @@ class UpdateStock(FlaskForm):
 
 
 #Deleting a product????
+
+#Main stock?
