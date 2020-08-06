@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body_content %}
-<p><h2>Stock List</h2></p>
+<p><h2>{{ current_user.first_name }}Stock List</h2></p>
 {% if Product %}
 {% for prod in Product %}
 	<div>
