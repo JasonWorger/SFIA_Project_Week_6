@@ -129,7 +129,7 @@ def delete_product(product_id):
 
 
 
-@app.route("main_stock")
+@app.route("/main_stock")
 @login_required
 def main_stock():
     StockData= Stock.query.all()
