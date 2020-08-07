@@ -269,3 +269,15 @@ class TestUpdate(TestBase):
 
 
 
+	# Test that when a use deletes a product from the stock list they are redirected to the correct page
+	def test_DeleteProduct(self):
+		with self.client:
+			self.client.post(url_for("login"),data = dict(email='admin@admin.com',password='admin2016'),follow_redirects = True)
+			response = self.client.post(
+				url_for("delete_book", product_id = 1),
+			follow_redirects=True)
+			self.assertIn(b'Add Product',response.data)
+			self.assertEqual(response.status_code, 200)
+
+
+
