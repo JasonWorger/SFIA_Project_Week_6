@@ -80,7 +80,6 @@ def addStock():
 	product_id = Product.query.filter_by(product_name=form.product_name.data).first()
 	
 	if form.validate_on_submit():
-		print("------------------------------------------------------")
 		stock_to_add = Stock(
 			product = product_id,
 			quantity = form.quantity.data)
@@ -102,7 +101,7 @@ def updateProduct(product_id):
 		product.size = form.size.data
 		product.price = form.price.data
 		db.session.commit()
-		return redirect(url_for("updateProduct", product_id = product_id))
+		return redirect(url_for("main_stock", product_id = product_id))
 	elif request.method == "GET":
 		form.product_name.data = product.product_name
 		form.product_category.data = product.product_category
@@ -121,7 +120,7 @@ def updateStock(product_name):
 		stock.product_name = form.product_name.data
 		stock.quantity = form.quantity.data
 		db.session.commit()
-		return redirect(url_for("updateStock", product_name = product_name))
+		return redirect(url_for("main_stock", product_name = product_name))
 	elif request.method == "GET":
 		form.product_name.data = stock.product_name
 		form.quantity.data = stock.quantity

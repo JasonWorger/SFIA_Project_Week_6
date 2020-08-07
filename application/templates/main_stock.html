@@ -1,22 +1,21 @@
 {% extends "layout.html" %}
 {% block body_content %}
 <p><h2>Stock List</h2></p>
-{% if Product %}
-{% for prod in Product %}
+{% if Stock %}
+{% for item in Stock %}
 	<div>
-		<h3>{{ Product.title }}</h3>
 		<p> 
-		 Product Name:</b>{{ prod.product_name }}
+		 Product Name:</b>{{ item.Product.product_name }}
          
-         Product Category:</b>{{ prod.product_category }}
+         Product Category:</b>{{ item.Product.product_category }}
          
-         Size:</b>{{ prod.size }}
+         Size:</b>{{ item.Product.size }}
          
-         Price:</b>{{ prod.price }}
+         Price:</b>{{ item.Product.price }}
         </p>
         <p>
-         Quantity:</b>{{ prod.quantity }}
-		<a href="{{ url_for('update_product', product_id=prod.id) }}"> Update Product</a>
+         Quantity:</b>{{ item.quantity }}
+		<a href="{{ url_for('update_product', product_id=stock.id) }}"> Update Product</a>
 		</p>
 	</div>
 	<div>
