@@ -1,26 +1,25 @@
 {% extends "layout.html" %}
 {% block body_content %}
 <p><h2>Stock List</h2></p>
-{% if Product %}
-{% for stock in Product %}
+{% if Stock %}
+{% for item in Stock %}
 	<div>
-		<h3>{{ Product.title }}</h3>
 		<p> 
-		 Product Name:</b>{{ stock.product_name }}
+		 Product Name:</b>{{ item.product.product_name }}
          
-         Product Category:</b>{{ stock.product_category }}
+         Product Category:</b>{{ item.product.product_category }}
          
-         Size:</b>{{ stock.size }}
+         Size:</b>{{ item.product.size }}
          
-         Price:</b>{{ stock.price }}
+         Price:</b>{{ item.product.price }}
         </p>
         <p>
-         Quantity:</b>{{ stock.quantity }}
-		<a href="{{ url_for('update_product', product_id=stock.id) }}"> Update Product</a>
+         Quantity:</b>{{ item.quantity }}
+		<a href="{{ url_for('updateProduct', product_id=item.product_id) }}"> Update Product</a>
 		</p>
 	</div>
 	<div>
-		<form action="{{ url_for('deleteProduct') }}">
+		<form action="{{ url_for('deleteProduct', product_id=item.product_id) }}">
 			<button type="submit">Delete Product</button>
 		</form>
 	</div>
