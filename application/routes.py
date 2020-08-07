@@ -110,23 +110,6 @@ def updateProduct(product_id):
 	return render_template("updateProduct.html", title = "Update Product", form = form)
 
 
-#Updating Stock
-@app.route("/updateStock/<product_name>", methods = ["GET", "POST"])
-@login_required
-def updateStock(product_name):
-	stock = Stock.query.filter_by(product_name = product_name).first()
-	form = UpdateStock()
-	if form.validate_on_submit():
-		stock.product_name = form.product_name.data
-		stock.quantity = form.quantity.data
-		db.session.commit()
-		return redirect(url_for("main_stock", product_name = product_name))
-	elif request.method == "GET":
-		form.product_name.data = stock.product_name
-		form.quantity.data = stock.quantity
-	return render_template("updateStock.html", title = "Update Stock", form = form)
-
-
 #Deleting a product
 @app.route("/product/delete/<product_id>", methods = ["GET", "POST"])
 @login_required
