@@ -134,12 +134,12 @@ def deleteProduct(product_id):
 	if current_user.is_authenticated:
 		product = Product.query.filter_by(product_id = product_id).all()
 		stock = Stock.query.filter_by(product_id = product_id).all()
-		if stock:
-			for i in stock:
-				db.session.delete(i)
+		for i in stock:
+		    db.session.delete(i)
+			db.session.commit()
 		for x in product:
 			db.session.delete(x) 
-		db.session.commit()
+			db.session.commit()
 	return redirect(url_for("addProduct"))
 
 
