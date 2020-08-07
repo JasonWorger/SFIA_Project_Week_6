@@ -4,6 +4,16 @@
     <h2>Add Stock</h2>
     <form action="" method="post">
         {{ form.hidden_tag() }}
+        {{ form.select_title.label }}
+        {{ form.select_title }}
+        {% if form.select_title.errors %}
+    <div class="error">
+ {% for error in form.select_title.errors %}
+ <span>{{ error }}</span>
+ {% endfor %}
+ </div>
+ {% endif %}
+ <br>
         <p>
             {{ form.product_name.label }}<br>
             {{ form.product_name(size=25) }}<br>

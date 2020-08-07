@@ -77,10 +77,16 @@ def addProduct():
 @login_required
 def addStock():
 	form = AddStock()
-	product_id = Product.query.filter_by(product_name=form.product_name.data).first()
+	choices = Product.query.filter_by(product_name=Product.product_name).all()
+	choices2 =[]
+	for book in choices:
+ 		choices2.append(book.product_name)
+
+
+	pro = Product.query.filter_by(product_name=form.product_name.data).first()
 	if form.validate_on_submit():
 		stock_to_add = Stock(
-			product = product_id,
+			product = pro,
 			quantity = form.quantity.data)
 		db.session.add(stock_to_add)
 		db.session.commit()
