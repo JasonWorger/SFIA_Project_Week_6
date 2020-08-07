@@ -143,7 +143,7 @@ class TestUserViews(TestBase):
 			self.assertIn(b"login", response.data)
 
 
-   def test_logout(self):
+	def test_logout(self):
 		with self.client:
 			response = self.client.get(
 				'/logout',
