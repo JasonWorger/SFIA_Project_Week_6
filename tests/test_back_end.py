@@ -37,6 +37,7 @@ class TestBase(TestCase):
 		db.session.add(admin)
 		db.session.add(employee)
 		db.session.commit()
+		
 
 	def tearDown(self):
 		"""
@@ -234,7 +235,7 @@ class TestAdd(TestBase):
 	def test_addStock(self):
 	# Test that when stock is added, the user is redirected to the main stock page
 		with self.client:
-			self.client.post(url_for('addProduct'), data=dict(product_name = "coke", product_category = "soft", size = "500", price = "2.00"),follow_redirects=True)
+			self.client.post(url_for('login'), data=dict(email='admin@admin.com',password='admin2016'),follow_redirects=True)
 			response = self.client.post(
 				'/addStock',
 				data=dict(
