@@ -78,7 +78,7 @@ def addProduct():
 def addStock():
     form = AddStock()
     if form.validate_on_submit():
-        product_id = Product.query.filter_by(product_name=form.product_name.data).all()
+        product_id = Product.query.filter_by(product_name=form.product_name.data).first()
         stock_to_add = Stock(
             product = product_id,
             quantity = form.quantity.data)
