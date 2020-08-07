@@ -6,10 +6,7 @@
 			<a href="{{ url_for('main_stock') }}">Stock List</a>
 			<a href="{{ url_for('addStock') }}">Add Stock</a>
 			<a href="{{ url_for('addProduct') }}">Add Product</a>
-			<a href="{{ url_for('updateProduct', product_id=1) }}">Update Product</a>
-			<a href="{{ url_for('updateStock', product_name= Coke) }}">Update Stock</a>
 			<a href="{{ url_for('logout') }}">Logout</a>
-			
 			
 		{% else %}
 			<a href="{{ url_for('login') }}">Login</a>
