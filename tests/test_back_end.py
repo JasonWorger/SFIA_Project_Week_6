@@ -251,6 +251,7 @@ class TestUpdate(TestBase):
 	# Test that when product or stock is updated, the user is redirected to the correct page visible.
 	def test_UpdateProduct(self):
 		with self.client:
+			self.client.post(url_for('login'), data=dict(email='admin@admin.com',password='admin2016'),follow_redirects=True)
 			response = self.client.post(url_for("updateProduct"), follow_redirects = True)
 			self.assertIn(b'Update Product',response.data)
 
