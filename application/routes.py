@@ -77,8 +77,8 @@ def addProduct():
 @login_required
 def addStock():
     form = AddStock()
+    product_id = Product.query.filter_by(product_name=form.product_name.data).first()
     if form.validate_on_submit():
-        product_id = Product.query.filter_by(product_name=form.product_name.data).first()
         stock_to_add = Stock(
             product = product_id,
             quantity = form.quantity.data)
@@ -131,9 +131,14 @@ def updateStock(product_name):
 @login_required
 def deleteProduct(product_id):
 	if current_user.is_authenticated:
-		product = Product.query.filter_by(product_id = product_id).first()
-		db.session.delete(product)
-		db.session.commit
+		product = Product.query.filter_by(product_id = product_id).all()
+        stock = Stock.query.filter_by(product_id = product_id).all()
+        if stock:
+            for i in stock:
+                db.session.delete(i)
+		for x in product:
+            db.session.delete(x) 
+        db.session.commit()
 	return redirect(url_for("addProduct"))
 
 
