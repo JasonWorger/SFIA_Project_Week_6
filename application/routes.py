@@ -4,10 +4,6 @@ from application.models import Users, Stock, Product
 from flask_login import login_user, current_user, logout_user, login_required
 from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, AddProduct, AddStock, UpdateProduct, UpdateStock
 
-
-
-
-
 #This is the login route
 @app.route('/')
 @app.route("/login", methods=['GET', 'POST'])
@@ -49,6 +45,7 @@ def register():
         return redirect(url_for('addProduct'))
     return render_template('register.html', title='Register', form=form)
 
+
 #This is the logout route
 @app.route("/logout")
 def logout():
@@ -66,8 +63,7 @@ def addProduct():
             product_name = form.product_name.data,
             product_category = form.product_category.data,
             price = form.price.data,
-            size = form.size.data
-        )
+            size = form.size.data)
         db.session.add(product_to_add)
         db.session.commit()
         return redirect(url_for('addStock'))
@@ -75,18 +71,18 @@ def addProduct():
         print(form.errors)
     return render_template('addProduct.html', title='Add Product', form=form)
 
+
 #Adding Stock
 @app.route("/addStock", methods=['GET', 'POST'])
 @login_required
 def addStock():
     form = AddStock()
     if form.validate_on_submit():
+        product_id = Product.query.filter_by(product_name=form.product_name.data).first()
         stock_to_add = Stock(
-            #Not validating product name?
-            # product_id = Product.query.filter_by(product_name=form.product_name.data).first(),
-            product_name = Product.query.filter_by(product_name=form.product_name.data).first(),
+            product_id = Product.query.filter_by(product_name=form.product_name.data).first(),
             quantity = form.quantity.data
-        )
+            product = product_name
         db.session.add(stock_to_add)
         db.session.commit()
         return redirect(url_for("main_stock"))
@@ -130,18 +126,19 @@ def updateStock(product_name):
 		form.quantity.data = stock.quantity
 	return render_template("updateStock.html", title = "Update Stock", form = form)
 
+
 #Deleting a product
-@app.route("/product/delete/<product_id>")
+@app.route("/product/delete/<product_id>", methods = ["GET", "POST"])
 @login_required
 def deleteProduct(product_id):
 	if current_user.is_authenticated:
 		product = Product.query.filter_by(product_id = product_id).first()
 		db.session.delete(product)
 		db.session.commit
-		return redirect(url_for("addProduct"))
+	return redirect(url_for("addProduct"))
 
 
-
+#Main stock list display page
 @app.route("/main_stock")
 def main_stock():
     StockData= Stock.query.all()
