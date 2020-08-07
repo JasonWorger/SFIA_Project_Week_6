@@ -113,7 +113,7 @@ class AddStock(FlaskForm):
 
     def validate_product_name(self, product_name):
         product_name = Product.query.filter_by(product_name=product_name.data).first()
-        if product_name is not None:
+        if product_name is None:
             raise ValidationError("Unable to add stock as product does not exist. Please add the product")
 
 
