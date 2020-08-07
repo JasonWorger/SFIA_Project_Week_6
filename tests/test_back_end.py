@@ -159,7 +159,7 @@ class TestProductViews(TestBase):
 				follow_redirects = True
 			)
 			response = self.client.get(url_for("addProduct"))
-			self.assertEqual(response.status_code, 302)
+			self.assertEqual(response.status_code, 200)
 			self.assertIn(b"Add Product", response.data)
 
 
@@ -174,7 +174,7 @@ class TestProductViews(TestBase):
 				follow_redirects = True
 			)
 			response = self.client.get(url_for("updateProduct", product_id = 1))
-			self.assertEqual(response.status_code, 302)
+			self.assertEqual(response.status_code, 200)
 			self.assertIn(b"Update Product", response.data)
 
 
