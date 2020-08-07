@@ -135,7 +135,7 @@ def deleteProduct(product_id):
 		product = Product.query.filter_by(product_id = product_id).all()
 		stock = Stock.query.filter_by(product_id = product_id).all()
 		for i in stock:
-		    db.session.delete(i)
+			db.session.delete(i)
 			db.session.commit()
 		for x in product:
 			db.session.delete(x) 
