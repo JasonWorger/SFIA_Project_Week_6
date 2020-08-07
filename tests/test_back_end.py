@@ -64,47 +64,47 @@ class TestViews(TestBase):
 		response = self.client.get(url_for('main_stock'))
 		self.assertEqual(response.status_code, 200)
 	
-    def test_login_updateProduct(self):
+	def test_login_updateProduct(self):
 		response = self.client.get(url_for('UpdateProduct'))
 		self.assertEqual(response.status_code, 200)
-    
-    def test_login_updateStock(self):
+	
+	def test_login_updateStock(self):
 		response = self.client.get(url_for('UpdateStock'))
 		self.assertEqual(response.status_code, 200)
-    
-    def test_login_addProduct(self):
+	
+	def test_login_addProduct(self):
 		response = self.client.get(url_for('addProduct'))
 		self.assertEqual(response.status_code, 200)
-    
-    def test_login_addStock(self):
+	
+	def test_login_addStock(self):
 		response = self.client.get(url_for('addStock'))
 		self.assertEqual(response.status_code, 200)
-    
+	
 
 
 class TestViews(TestBase):
-    # testing to make sure that the correct pages load when a user is not logged in
-    def test_notloggedin_addProduct(self):
+	# testing to make sure that the correct pages load when a user is not logged in
+	def test_notloggedin_addProduct(self):
 		response1 = self.client.get(url_for("addProduct"), follow_redirects = True)
 		self.assertEqual(response1.status_code, 200)
 		self.assertIn(b"login", response1.data)
-    
-    def test_notloggedin_addStock(self):
+	
+	def test_notloggedin_addStock(self):
 		response2 = self.client.get(url_for("addStock"), follow_redirects = True)
 		self.assertEqual(response1.status_code, 200)
 		self.assertIn(b"login", response2.data)
-    
-    def test_notloggedin_updateProduct(self):
+	
+	def test_notloggedin_updateProduct(self):
 		response3 = self.client.get(url_for("updateProduct", product_id=1), follow_redirects = True)
 		self.assertEqual(response1.status_code, 200)
 		self.assertIn(b"login", response3.data)
 
-    def test_notloggedin_updateStock(self):
+	def test_notloggedin_updateStock(self):
 		response4 = self.client.get(url_for("updateStock"), follow_redirects = True)
 		self.assertEqual(response1.status_code, 200)
 		self.assertIn(b"login", response4.data)
 
-    def test_notloggedin_main_stock(self):
+	def test_notloggedin_main_stock(self):
 		response5 = self.client.get(url_for("main_stock"), follow_redirects = True)
 		self.assertEqual(response1.status_code, 200)
 		self.assertIn(b"login", response5.data)
@@ -128,19 +128,19 @@ class TestUserViews(TestBase):
 			self.assertEqual(response.status_code, 200)
 
 
-    def test_users_login(self):
-        with self.client:
-            self.client.post(
-                url_for("login"),
-                data = dict(
-                    email = "Joebloggs@mail.com",
-                    password = "password"
-                ),
-                follow_redirects = True
-            )
-            response = self.client.get(url_for("login"), follow_redirects = True)
-            self.assertEqual(response.status_code, 200)
-            self.assertIn(b"login", response.data)
+	def test_users_login(self):
+		with self.client:
+			self.client.post(
+				url_for("login"),
+				data = dict(
+					email = "Joebloggs@mail.com",
+					password = "password"
+				),
+				follow_redirects = True
+			)
+			response = self.client.get(url_for("login"), follow_redirects = True)
+			self.assertEqual(response.status_code, 200)
+			self.assertIn(b"login", response.data)
 
 
    def test_logout(self):
@@ -153,67 +153,67 @@ class TestUserViews(TestBase):
 
 #Testing the product pages as a user logged in
 class TestProductViews(TestBase):
-    def test_add_product(self):
-        with self.client:
-            self.client.post(
-                url_for("login"),
-                data = dict(
-                    username = "user1",
-                    password = "password1"
-                ),
-                follow_redirects = True
-            )
-            response = self.client.get(url_for("addProduct"))
-            self.assertEqual(response.status_code, 200)
-            self.assertIn(b"Add Product", response.data)
+	def test_add_product(self):
+		with self.client:
+			self.client.post(
+				url_for("login"),
+				data = dict(
+					username = "user1",
+					password = "password1"
+				),
+				follow_redirects = True
+			)
+			response = self.client.get(url_for("addProduct"))
+			self.assertEqual(response.status_code, 200)
+			self.assertIn(b"Add Product", response.data)
 
 
-    def test_update_product(self):
-        with self.client:
-            self.client.post(
-                url_for("login"),
-                data = dict(
-                    username = "user1",
-                    password = "password1"
-                ),
-                follow_redirects = True
-            )
-            response = self.client.get(url_for("updateProduct", product_id = 1))
-            self.assertEqual(response.status_code, 200)
-            self.assertIn(b"Update Product", response.data)
+	def test_update_product(self):
+		with self.client:
+			self.client.post(
+				url_for("login"),
+				data = dict(
+					username = "user1",
+					password = "password1"
+				),
+				follow_redirects = True
+			)
+			response = self.client.get(url_for("updateProduct", product_id = 1))
+			self.assertEqual(response.status_code, 200)
+			self.assertIn(b"Update Product", response.data)
 
 
 
 
 #Testing the stock pages as a user logged in
 class TestStockViews(TestBase):
-    def test_add_stock(self):
-        with self.client:
-            self.client.post(
-                url_for("login"),
-                data = dict(
-                    username = "user1",
-                    password = "password1"
-                ),
-                follow_redirects = True
-            )
-            response = self.client.get(url_for("updateProduct"))
-            self.assertEqual(response.status_code, 200)
-            self.assertIn(b"Update Product", response.data)
+	def test_add_stock(self):
+		with self.client:
+			self.client.post(
+				url_for("login"),
+				data = dict(
+					username = "user1",
+					password = "password1"
+				),
+				follow_redirects = True
+			)
+			response = self.client.get(url_for("updateProduct"))
+			self.assertEqual(response.status_code, 200)
+			self.assertIn(b"Update Product", response.data)
 
-    def test_update_stock(self):
-        with self.client:
-            self.client.post(
-                url_for("login"),
-                data = dict(
-                    username = "user1",
-                    password = "password1"
-                ),
-                follow_redirects = True
-            )
-            response = self.client.get(url_for("updateStock", product_id = 1))
-            self.assertEqual(response.status_code, 200)
-            self.assertIn(b"Update Stock", response.data)
+	def test_update_stock(self):
+		with self.client:
+			self.client.post(
+				url_for("login"),
+				data = dict(
+					username = "user1",
+					password = "password1"
+				),
+				follow_redirects = True
+			)
+			response = self.client.get(url_for("updateStock", product_id = 1))
+			self.assertEqual(response.status_code, 200)
+			self.assertIn(b"Update Stock", response.data)
 
 
 class TestAadd(TestBase):
@@ -235,7 +235,7 @@ class TestAadd(TestBase):
 			self.assertEqual(response.status_code, 200)
 
 
-    def test_addStock(self):
+	def test_addStock(self):
 	# Test that when stock is added, the user is redirected to the main stock page
 		with self.client:
 			self.client.post(url_for('login'), data=dict(email='admin@admin.com',password='admin2016'),follow_redirects=True)
@@ -270,7 +270,7 @@ class TestUpdate(TestBase):
 			)
 			self.assertEqual(response.status_code, 200)
 
-    def test_updateStock(self):
+	def test_updateStock(self):
 	# Test that when stock is added, the user is redirected to the main stock page
 		with self.client:
 			self.client.post(url_for('login'), data=dict(email='admin@admin.com',password='admin2016'),follow_redirects=True)
