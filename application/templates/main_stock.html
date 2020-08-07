@@ -19,7 +19,7 @@
 		</p>
 	</div>
 	<div>
-		<form action="{{ url_for('deleteProduct') }}">
+		<form action="{{ url_for('deleteProduct', product_id=item.id) }}">
 			<button type="submit">Delete Product</button>
 		</form>
 	</div>
