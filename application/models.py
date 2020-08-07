@@ -21,7 +21,7 @@ class Users(db.Model, UserMixin):
         ])
 
 class Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    product_id = db.Column(db.Integer, primary_key=True)
     product_name = db.Column(db.String(50), nullable=False, unique = True)
     product_category = db.Column(db.String(30), nullable=False)
     price = db.Column(db.Float, nullable=False)
@@ -35,7 +35,7 @@ class Product(db.Model):
 
 class Stock(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('product.product_id'))
     quantity = db.Column(db.Integer, nullable=False)
     
     def __repr__(self):
@@ -52,4 +52,3 @@ class Stock(db.Model):
 
 
 
-        
