@@ -63,6 +63,7 @@ class TestViews(TestBase):
 	def test_login_main_stock(self):
 		response = self.client.get(url_for('main_stock'))
 		self.assertEqual(response.status_code, 200)
+		
 	
 	def test_login_updateProduct(self):
 		response = self.client.get(url_for('UpdateProduct'))
@@ -153,8 +154,8 @@ class TestProductViews(TestBase):
 			self.client.post(
 				url_for("login"),
 				data = dict(
-					username = "user1",
-					password = "password1"
+					email = "admin@admin.com", 
+					password = "admin2016"
 				),
 				follow_redirects = True
 			)
@@ -168,8 +169,8 @@ class TestProductViews(TestBase):
 			self.client.post(
 				url_for("login"),
 				data = dict(
-					username = "user1",
-					password = "password1"
+					email = "admin@admin.com",
+					password = "admin2016"
 				),
 				follow_redirects = True
 			)
@@ -233,7 +234,7 @@ class TestAdd(TestBase):
 	def test_addStock(self):
 	# Test that when stock is added, the user is redirected to the main stock page
 		with self.client:
-			self.client.post(url_for('login'), data=dict(email='admin@admin.com',password='admin2016'),follow_redirects=True)
+			self.client.post(url_for('addProduct'), data=dict(product_name = "coke", product_category = "soft", size = "500", price = "2.00"),follow_redirects=True)
 			response = self.client.post(
 				'/addStock',
 				data=dict(
@@ -249,41 +250,20 @@ class TestUpdate(TestBase):
 	# Test that when product or stock is updated, the user is redirected to the correct page visible.
 	def test_UpdateProduct(self):
 		with self.client:
-			response = self.client.post(url_for("login"),data = dict(email='admin@admin.com',password='admin2016'),follow_redirects = True)
-			self.assertIn(b'My Library',response.data)
+			response = self.client.post(url_for("updateProduct"), follow_redirects = True)
+			self.assertIn(b'Update Product',response.data)
 
 			response = self.client.post(
-				url_for("update_lib", book_id = 1),
-				data = dict(
-					first_name = "Test update name",
-					surname = "Test updatesuname",
-					title = "Test update Title",
-					pages = "123",
-					language = "Test update language"
-				),
-				follow_redirects=True
-			)
-			self.assertEqual(response.status_code, 200)
-
-	def test_updateStock(self):
-	# Test that when stock is added, the user is redirected to the main stock page
-		with self.client:
-			self.client.post(url_for('login'), data=dict(email='admin@admin.com',password='admin2016'),follow_redirects=True)
-			response = self.client.post(
-				'/updateStock',
+				'/updateProduct',
 				data=dict(
 					product_name = "Test name",
-					quantity = "10",
+					product_category = "Test category",
+					price = "3.50",
+					size = "330",
 				),
 				follow_redirects=True
 			)
-			self.assertIn(b'Stock List', response.data)
 			self.assertEqual(response.status_code, 200)
 
 
-
-
-
-
-#DELETE PRODUCT/STOCK
 

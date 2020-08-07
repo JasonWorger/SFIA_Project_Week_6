@@ -128,6 +128,7 @@ def deleteProduct(product_id):
 
 #Main stock list display page
 @app.route("/main_stock")
+@login_required
 def main_stock():
 	StockList= Stock.query.all()
 	return render_template('main_stock.html', title = "My Stock List", Stock=StockList)
