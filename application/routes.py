@@ -81,6 +81,7 @@ def addStock():
         # product_id = Product.query.filter_by(product_name=form.product_name.data).first()
         stock_to_add = Stock(
             product = Product.query.filter_by(product_name=form.product_name.data).first(),
+            product_name = form.product_name.data,
             quantity = form.quantity.data)
         db.session.add(stock_to_add)
         db.session.commit()
