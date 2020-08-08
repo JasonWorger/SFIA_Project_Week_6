@@ -274,7 +274,7 @@ class TestUpdate(TestBase):
 		with self.client:
 			self.client.post(url_for("login"),data = dict(email='admin@admin.com',password='admin2016'),follow_redirects = True)
 			response = self.client.post(
-				url_for("delete_book", product_id = 1),
+				url_for("/product/delete/<product_id>", product_id = 1),
 			follow_redirects=True)
 			self.assertIn(b'Add Product',response.data)
 			self.assertEqual(response.status_code, 200)

@@ -85,19 +85,19 @@ class TestNavBar(TestBase):
 		assert url_for("login") in self.driver.current_url
 
 	#Main Stock
-	def test_main_stock(self):
-		self.driver.find_element_by_xpath("/html/body/div[1]/a[1]").click()
-		assert url_for("main_stock") in self.driver.current_url
+	# def test_main_stock(self):
+	# 	self.driver.find_element_by_xpath("/html/body/div[1]/a[1]").click()
+	# 	assert url_for("main_stock") in self.driver.current_url
 
 	#Adding Product	
-	def test_add_product(self):
-		self.driver.find_element_by_xpath("/html/body/div[1]/a[3]").click()
-		assert url_for("addProduct") in self.driver.current_url
+	# def test_add_product(self):
+	# 	self.driver.find_element_by_xpath("/html/body/div[1]/a[3]").click()
+	# 	assert url_for("addProduct") in self.driver.current_url
 
 	#Adding Stock
-	def test_add_stock(self):
-		self.driver.find_element_by_xpath("/html/body/div[1]/a[2]").click()
-		assert url_for("addStock") in self.driver.current_url
+	# def test_add_stock(self):
+	# 	self.driver.find_element_by_xpath("/html/body/div[1]/a[2]").click()
+	# 	assert url_for("addStock") in self.driver.current_url
 
 
 
@@ -142,7 +142,7 @@ class TestLogin(TestBase):
 		assert url_for("login") in self.driver.current_url
 		
 		# inputs the test user email
-		self.driver.find_element_by_xpath('//*[@id="email"]"').send_keys(test_admin_email)
+		self.driver.find_element_by_xpath('//*[@id="email"]').send_keys(test_admin_email)
 		
 		# inputs the test user password
 		self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(test_admin_password)
@@ -163,7 +163,7 @@ class TestAddProduct(TestBase):
 		self.driver.find_element_by_xpath("/html/body/div[1]/a[1]").click()
 		time.sleep(1)
 		assert url_for("login") in self.driver.current_url
-		self.driver.find_element_by_xpath('//*[@id="email"]"').send_keys(test_admin_email)
+		self.driver.find_element_by_xpath('//*[@id="email"]').send_keys(test_admin_email)
 		self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(test_admin_password)
 		self.driver.find_element_by_xpath('//*[@id="submit"]').click()
 		assert url_for("addProduct") in self.driver.current_url
