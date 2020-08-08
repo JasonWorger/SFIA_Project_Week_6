@@ -198,7 +198,7 @@ class TestAddStock(TestBase):
 		self.driver.find_element_by_xpath("/html/body/div[1]/a[1]").click()
 		time.sleep(1)
 		assert url_for("login") in self.driver.current_url
-		self.driver.find_element_by_xpath('//*[@id="email"]"').send_keys(test_admin_email)
+		self.driver.find_element_by_xpath('//*[@id="email"]').send_keys(test_admin_email)
 		self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(test_admin_password)
 		self.driver.find_element_by_xpath('//*[@id="submit"]').click()
 		assert url_for("addProduct") in self.driver.current_url
