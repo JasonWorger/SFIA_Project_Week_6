@@ -90,12 +90,12 @@ class TestNavBar(TestBase):
 		assert url_for("main_stock") in self.driver.current_url
 
 	#Adding Product	
-	 def test_add_product(self):
+	def test_add_product(self):
 		self.driver.find_element_by_xpath("/html/body/div[1]/a[3]").click()
 		assert url_for("addProduct") in self.driver.current_url
 
 	#Adding Stock
-	 def test_add_stock(self):
+	def test_add_stock(self):
 		self.driver.find_element_by_xpath("/html/body/div[1]/a[2]").click()
 		assert url_for("addStock") in self.driver.current_url
 
