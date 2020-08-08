@@ -52,7 +52,7 @@ class TestBase(LiveServerTestCase):
 		#Creating a test stock
 		teststock = Stock(
 			id = 1,
-			prooduct_id = 1,
+			product_id = 1,
 			quantity = 5
 		)
 
