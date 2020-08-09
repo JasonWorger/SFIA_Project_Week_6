@@ -61,10 +61,10 @@ class TestViews(TestBase):
 		self.assertIn(b"login", response.data)
 
 
-class TestViews(TestBase):
+class TestProductPages(TestBase):
 	# Tests ensuring the correct pages load when user is logged in
 	def test_login_main_stock(self):
-			with self.client:
+		with self.client:
 			self.client.post(
 				url_for("login"),
 				data = dict(
@@ -75,11 +75,11 @@ class TestViews(TestBase):
 			)
 		response = self.client.get(url_for('main_stock'))
 		self.assertEqual(response.status_code, 200)
-		self.assertIn(b"main_stock", response.data)
+		self.assertIn(b"Stock List", response.data)
 		
 	
 	def test_login_updateProduct(self):
-			with self.client:
+		with self.client:
 			self.client.post(
 				url_for("login"),
 				data = dict(
@@ -106,7 +106,7 @@ class TestViews(TestBase):
 	
 
 
-class TestViews(TestBase):
+class TestLoginPages(TestBase):
 	# testing to make sure that the correct pages load when a user is not logged in
 	def test_notloggedin_addProduct(self):
 		response1 = self.client.get(url_for("addProduct"), follow_redirects = True)
