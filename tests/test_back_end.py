@@ -75,13 +75,22 @@ class TestViews(TestBase):
 			)
 		response = self.client.get(url_for('main_stock'))
 		self.assertEqual(response.status_code, 200)
-		self.assertIn(b"main_stock", response1.data)
+		self.assertIn(b"main_stock", response.data)
 		
 	
 	def test_login_updateProduct(self):
+			with self.client:
+			self.client.post(
+				url_for("login"),
+				data = dict(
+					email = "admin@admin.com",
+					password = "admin2016"
+				),
+				follow_redirects = True
+			)
 		response = self.client.get(url_for('UpdateProduct'))
 		self.assertEqual(response.status_code, 200)
-		self.assertIn(b"login", response1.data)
+		self.assertIn(b"Update Product", response.data)
 	
 	def test_login_updateStock(self):
 		response = self.client.get(url_for('UpdateStock'))
