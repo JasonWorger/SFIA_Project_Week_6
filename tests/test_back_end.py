@@ -280,16 +280,11 @@ class TestUpdate(TestBase):
 			self.client.get(url_for('updateProduct', product_id = 1), follow_redirects=True)
 
 		response = self.client.post(
-			'updateProduct',
-			data=dict(
-				product_name = "Water",
-				product_category = "Test category",
-				price = "3.50",
-				size = "330",
-			),
+			'updateProduct', product_id = 1,
 			follow_redirects=True
 		)
 		self.assertEqual(response.status_code, 200)
+		self.assertIn(b'Stock List', response.data)
 
 
 
