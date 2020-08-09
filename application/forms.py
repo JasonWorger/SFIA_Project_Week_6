@@ -143,6 +143,3 @@ class UpdateStock(FlaskForm):
             raise ValidationError("Unable to update stock. Please add stock first.")
 
 
-#Deleting a product????
-
-#Main stock?
