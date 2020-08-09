@@ -12,8 +12,8 @@ from application.models import Users, Product, Stock
 # Set test variables for test admin user
 test_admin_first_name = "admin"
 test_admin_last_name = "admin"
-test_admin_email = "admin@email.com"
-test_admin_password = "admin2020"
+test_admin_email = "admin@admin.com"
+test_admin_password = "admin2016"
 
 
 class TestBase(LiveServerTestCase):
@@ -155,7 +155,7 @@ class TestLogin(TestBase):
 
 
 
-#For the following tests the user must be logged in. Therefore the test will start with the user logging in.
+# #For the following tests the user must be logged in. Therefore the test will start with the user logging in.
 class TestAddProduct(TestBase):
 
 	def test_add_product(self):
