@@ -2,7 +2,7 @@
 Description=Barstock Service
 
 [Service]
-User=jenkins
+User=barstockuser
 WorkingDirectory=/opt/barstock
 EnvironmentFile=/opt/barstock/flask.env
 ExecStart=/opt/barstock/venv/bin/gunicorn --workers=4 --bind=0.0.0.0:5000 app:app
