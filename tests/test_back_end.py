@@ -279,10 +279,7 @@ class TestUpdate(TestBase):
 			self.client.post(url_for('login'), data=dict(email='admin@admin.com',password='admin2016'),follow_redirects=True)
 			self.client.get(url_for('updateProduct', product_id = 1), follow_redirects=True)
 
-		response = self.client.post(
-			'updateProduct', product_id = 1,
-			follow_redirects=True
-		)
+		response = self.client.post(url_for('updateProduct', product_id = 1), follow_redirects=True)
 		self.assertEqual(response.status_code, 200)
 		self.assertIn(b'Stock List', response.data)
 
