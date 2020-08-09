@@ -280,7 +280,7 @@ class TestUpdate(TestBase):
 			self.client.get(url_for('updateProduct', product_id = 1), follow_redirects=True)
 
 		response = self.client.post(
-			'/updateProduct',
+			'updateProduct',
 			data=dict(
 				product_name = "Water",
 				product_category = "Test category",
