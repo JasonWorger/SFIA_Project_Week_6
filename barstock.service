@@ -5,7 +5,10 @@ Description=Barstock Service
 User=jenkins
 WorkingDirectory=/opt/barstock
 EnvironmentFile=/opt/barstock/flask.env
-ExecStart=/opt/barstock/venv/bin/gunicorn --workers=4 --bind=0.0.0.0:5000 app:app
+ExecStart=/bin/sh \
+        -c 'cd /opt/barstock && \
+        . ./venv/bin/activate && \
+        gunicorn --workers=4 --bind=0.0.0.0:5000 app:app'
 
 [Install]
 WantedBy=multi-user.target
