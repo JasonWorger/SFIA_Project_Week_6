@@ -110,17 +110,33 @@ class TestProductPages(TestBase):
 		self.assertEqual(response.status_code, 200)
 		self.assertIn(b"Update Product", response.data)
 	
-	def test_login_updateStock(self):
-		response = self.client.get(url_for('UpdateStock'))
-		self.assertEqual(response.status_code, 200)
-	
 	def test_login_addProduct(self):
+		with self.client:
+			self.client.post(
+				url_for("login"),
+				data = dict(
+					email = "admin@admin.com",
+					password = "admin2016"
+				),
+				follow_redirects = True
+			)
 		response = self.client.get(url_for('addProduct'))
 		self.assertEqual(response.status_code, 200)
+		self.assertIn(b"Add Product", response.data)
 	
 	def test_login_addStock(self):
+		with self.client:
+			self.client.post(
+				url_for("login"),
+				data = dict(
+					email = "admin@admin.com",
+					password = "admin2016"
+				),
+				follow_redirects = True
+			)
 		response = self.client.get(url_for('addStock'))
 		self.assertEqual(response.status_code, 200)
+		self.assertIn(b"Add Stock", response.data)
 	
 
 
@@ -150,62 +166,34 @@ class TestLoginPages(TestBase):
 #Testing the register,login and logout of user views
 class TestUserViews(TestBase):
 	def test_register(self):
-		with self.client:
-			response = self.client.post(
-				url_for('register'),
-				data = dict(
-					first_name = 'Joe',
-					last_name = 'Bloggs',
-					email = 'Joebloggs@mail.com',
-					password = 'password',
-					confrim_password = 'password',
-				),
-				follow_redirects = True
-			)
-			self.assertEqual(response.status_code, 200)
-
+		response = self.client.post(
+			url_for('register'),
+			data = dict(
+				first_name = 'Joe',
+				last_name = 'Bloggs',
+				email = 'Joebloggs@mail.com',
+				password = 'password',
+				confrim_password = 'password',
+			),
+			follow_redirects = True
+		)
+		self.assertEqual(response.status_code, 200)
+		self.assertIn(b"login", response.data)
 
 	def test_users_login(self):
-		with self.client:
-			self.client.post(
-				url_for("login"),
-				data = dict(
-					email = "Joebloggs@mail.com",
-					password = "password"
-				),
-				follow_redirects = True
-			)
-			response = self.client.get(url_for("login"), follow_redirects = True)
-			self.assertEqual(response.status_code, 200)
-			self.assertIn(b"login", response.data)
+		response = 	self.client.post(
+			url_for("login"),
+			data = dict(
+				email = "admin@admin.com",
+				password = "admin2016"
+			),
+			follow_redirects = True
+		)
+		self.assertEqual(response.status_code, 200)
+		self.assertIn(b"Add Product", response.data)
 
 
 	def test_logout(self):
-		with self.client:
-			response = self.client.get(
-				'/logout',
-				follow_redirects = True)
-			self.assertEqual(response.status_code, 200)
-
-
-#Testing the product pages as a user logged in
-class TestProductViews(TestBase):
-	def test_add_product(self):
-		with self.client:
-			self.client.post(
-				url_for("login"),
-				data = dict(
-					email = "admin@admin.com", 
-					password = "admin2016"
-				),
-				follow_redirects = True
-			)
-			response = self.client.get(url_for("addProduct"))
-			self.assertEqual(response.status_code, 200)
-			self.assertIn(b"Add Product", response.data)
-
-
-	def test_update_product(self):
 		with self.client:
 			self.client.post(
 				url_for("login"),
@@ -215,12 +203,9 @@ class TestProductViews(TestBase):
 				),
 				follow_redirects = True
 			)
-			response = self.client.get(url_for("updateProduct", product_id = 1))
-			self.assertEqual(response.status_code, 200)
-			self.assertIn(b"Update Product", response.data)
-
-
-
+		response = self.client.get('logout', follow_redirects = True)
+		self.assertEqual(response.status_code, 200)
+		self.assertIn(b"login", response.data)
 
 # #Testing the stock pages as a user logged in
 # class TestStockViews(TestBase):
@@ -258,54 +243,53 @@ class TestAdd(TestBase):
 	# Test that when a product is added, the user is redirected to the add stock page
 		with self.client:
 			self.client.post(url_for('login'), data=dict(email='admin@admin.com',password='admin2016'),follow_redirects=True)
-			response = self.client.post(
-				'/addProduct',
-				data=dict(
-					product_name = "Test name",
-					product_category = "Test category",
-					price = "3.50",
-					size = "330",
-				),
-				follow_redirects=True
-			)
-			self.assertIn(b'addStock', response.data)
-			self.assertEqual(response.status_code, 200)
+		response = self.client.post(
+			'/addProduct',
+			data=dict(
+				product_name = "Test name",
+				product_category = "Test category",
+				price = "3.50",
+				size = "330",
+			),
+			follow_redirects=True
+		)
+		self.assertIn(b'addStock', response.data)
+		self.assertEqual(response.status_code, 200)
 
 
 	def test_addStock(self):
 	# Test that when stock is added, the user is redirected to the main stock page
 		with self.client:
 			self.client.post(url_for('login'), data=dict(email='admin@admin.com',password='admin2016'),follow_redirects=True)
-			response = self.client.post(
-				'/addStock',
-				data=dict(
-					product_name = "Test name",
-					quantity = "5",
-				),
-				follow_redirects=True
-			)
-			self.assertIn(b'Stock List', response.data)
-			self.assertEqual(response.status_code, 200)
+		response = self.client.post(
+			'/addStock',
+			data=dict(
+				product_name = "Water",
+				quantity = "5",
+			),
+			follow_redirects=True
+		)
+		self.assertIn(b'Stock List', response.data)
+		self.assertEqual(response.status_code, 200)
 
 class TestUpdate(TestBase):
 	# Test that when product or stock is updated, the user is redirected to the correct page visible.
 	def test_UpdateProduct(self):
 		with self.client:
 			self.client.post(url_for('login'), data=dict(email='admin@admin.com',password='admin2016'),follow_redirects=True)
-			response = self.client.post(url_for("updateProduct"), follow_redirects = True)
-			self.assertIn(b'Update Product',response.data)
+			self.client.get(url_for('updateProduct', product_id = 1), follow_redirects=True)
 
-			response = self.client.post(
-				'/updateProduct',
-				data=dict(
-					product_name = "Test name",
-					product_category = "Test category",
-					price = "3.50",
-					size = "330",
-				),
-				follow_redirects=True
-			)
-			self.assertEqual(response.status_code, 200)
+		response = self.client.post(
+			'/updateProduct',
+			data=dict(
+				product_name = "Water",
+				product_category = "Test category",
+				price = "3.50",
+				size = "330",
+			),
+			follow_redirects=True
+		)
+		self.assertEqual(response.status_code, 200)
 
 
 
@@ -313,11 +297,11 @@ class TestUpdate(TestBase):
 	def test_DeleteProduct(self):
 		with self.client:
 			self.client.post(url_for("login"),data = dict(email='admin@admin.com',password='admin2016'),follow_redirects = True)
-			response = self.client.post(
-				url_for("/product/delete/<product_id>", product_id = 1),
-			follow_redirects=True)
-			self.assertIn(b'Add Product',response.data)
-			self.assertEqual(response.status_code, 200)
+		response = self.client.post(
+			url_for("deleteProduct", product_id = 1),
+		follow_redirects=True)
+		self.assertIn(b'Add Product',response.data)
+		self.assertEqual(response.status_code, 200)
 
 
 
