@@ -48,19 +48,19 @@ In consideration of the brief and requirements of the project, below is a stream
 
 The MoSCoW method was used when deciding the prioritization of certain features within the application and decided what would or wouldn&#39;t be included. The original MoSCoW of the project can be seen below:
 
-![](RackMultipart20200809-4-1pc6gdw_html_88448c5b91804536.png)
+![image](https://user-images.githubusercontent.com/66956487/89741023-ae6b6200-da85-11ea-8a19-88eba5c4a27c.png)
 
 **Project Tracking**
 
 Trello was the chosen method when planning the project and tracking the progress of tasks set out. This was done to ensure a steady workflow and create an agile work frame where changes could be made through the production of the web app. Below is the trello board used for this project:
 
-![](RackMultipart20200809-4-1pc6gdw_html_54be135f574158ab.png)
+![image](https://user-images.githubusercontent.com/66956487/89741046-dc50a680-da85-11ea-9f29-ca4b59863094.png)
 
 **Database Structure**
 
 Below is an entity relationship diagram (ERD) showing the tables that were used in the project and how they relate with each other. Everything in the diagram has been implemented.
 
-![](RackMultipart20200809-4-1pc6gdw_html_c7aac054be22e010.png)
+![image](https://user-images.githubusercontent.com/66956487/89741053-ed99b300-da85-11ea-8750-d24945acedbb.png)
 
 The ERD was used so that the relationship of tables could be visualised before being implemented and the development of back end coding began. It also provided a good base to fall back on to ensure the development of code was following this diagram, and ensuring consistency.
 
@@ -68,19 +68,20 @@ The ERD was used so that the relationship of tables could be visualised before b
 
 Below is the CI pipeline used for this project and includes the relationships between each tool and the frameworks used to create the app, perform sufficient tests and the deployment of the app in the smoothest and efficient manner. This is turn meant that once Jenkins was introduced, I would be able to change or produce code that is pushed to the version control system(GitHub), then automatically pushed to Jenkins with use of a build trigger webhook. Tests are then automatically run, and the app is pushed towards a live environment with no user input in between these stages. This is created with the use of job builds where I have instructed the server exactly to perform, and in the case of an error to subsequently stopped any proceeding builds that would follow.
 
-![](RackMultipart20200809-4-1pc6gdw_html_5532618060898ac7.png)
+![image](https://user-images.githubusercontent.com/66956487/89741061-00ac8300-da86-11ea-89bf-6a7db0661c8d.png)
+
 
 **Testing**
 
 The tools used for testing the application was pytest when conducting unit tests, while selenium was the preferred framework while performing integration tests. An acceptable coverage of these tasks was met to ensure that most of the application had relevant tests.
 
-![](RackMultipart20200809-4-1pc6gdw_html_967b25b98ae3528e.png)
+![image](https://user-images.githubusercontent.com/66956487/89741065-10c46280-da86-11ea-9ae2-27d751dab039.png)
 
 **Risk Assessment**
 
 The risk assessment produced for the project can be found below. It attempts to cover all risks or threats involved and what would be done to eliminate or reduce the impact of these threats.
 
-![](RackMultipart20200809-4-1pc6gdw_html_affb69691be0599e.png)
+![image](https://user-images.githubusercontent.com/66956487/89741073-1e79e800-da86-11ea-8057-7f25a84b12ba.png)
 
 **Future Improvements**
 
