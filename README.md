@@ -1,4 +1,4 @@
-**Bar Stock App**
+# **Bar Stock App**
 
 **Resources:**
 
