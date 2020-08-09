@@ -116,7 +116,7 @@ class TestRegistration(TestBase):
 		time.sleep(1)
 
 		# Filling in registration form
-		self.driver.find_element_by_xpath('//*[@id="email"]').send_keys(test_admin_email)
+		self.driver.find_element_by_xpath('//*[@id="email"]').send_keys("user@user.com")
 		self.driver.find_element_by_xpath('//*[@id="first_name"]').send_keys(
 			test_admin_first_name)
 		self.driver.find_element_by_xpath('//*[@id="last_name"]').send_keys(
@@ -156,39 +156,39 @@ class TestLogin(TestBase):
 
 
 # #For the following tests the user must be logged in. Therefore the test will start with the user logging in.
-class TestAddProduct(TestBase):
+# class TestAddProduct(TestBase):
 
-	def test_add_product(self):
+# 	def test_add_product(self):
 
-		self.driver.find_element_by_xpath("/html/body/div[1]/a[1]").click()
-		time.sleep(1)
-		assert url_for("login") in self.driver.current_url
-		self.driver.find_element_by_xpath('//*[@id="email"]').send_keys(test_admin_email)
-		self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(test_admin_password)
-		self.driver.find_element_by_xpath('//*[@id="submit"]').click()
-		assert url_for("addProduct") in self.driver.current_url
+# 		self.driver.find_element_by_xpath("/html/body/div[1]/a[1]").click()
+# 		time.sleep(1)
+# 		assert url_for("login") in self.driver.current_url
+# 		self.driver.find_element_by_xpath('//*[@id="email"]').send_keys(test_admin_email)
+# 		self.driver.find_element_by_xpath('//*[@id="password"]').send_keys(test_admin_password)
+# 		self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+# 		assert url_for("addProduct") in self.driver.current_url
 
-		#Navigating to add product page
-		self.driver.find_element_by_xpath('/html/body/div[1]/a[3]').click()
-		assert url_for("addProduct") in self.driver.current_url
+# 		#Navigating to add product page
+# 		self.driver.find_element_by_xpath('/html/body/div[1]/a[3]').click()
+# 		assert url_for("addProduct") in self.driver.current_url
 		
-		#Input product name
-		self.driver.find_element_by_xpath('//*[@id="product_name"]').send_keys("Water")
+# 		#Input product name
+# 		self.driver.find_element_by_xpath('//*[@id="product_name"]').send_keys("Water")
 		
-		#Input Type of drink
-		self.driver.find_element_by_xpath('//*[@id="product_category"]').send_keys("Soft")
+# 		#Input Type of drink
+# 		self.driver.find_element_by_xpath('//*[@id="product_category"]').send_keys("Soft")
 		
-		#Input product size
-		self.driver.find_element_by_xpath('//*[@id="size"]').send_keys("500")
+# 		#Input product size
+# 		self.driver.find_element_by_xpath('//*[@id="size"]').send_keys("500")
 		
-		#Input Price
-		self.driver.find_element_by_xpath('//*[@id="price"]').send_keys("2.00")
+# 		#Input Price
+# 		self.driver.find_element_by_xpath('//*[@id="price"]').send_keys("2.00")
 		
-		#Click on add product button
-		self.driver.find_element_by_xpath('//*[@id="submit"]').click()
+# 		#Click on add product button
+# 		self.driver.find_element_by_xpath('//*[@id="submit"]').click()
 		
-		#Check that the item has been added
-		assert url_for("addStock") in self.driver.current_url
+# 		#Check that the item has been added
+# 		assert url_for("addStock") in self.driver.current_url
 
 
 class TestAddStock(TestBase):
