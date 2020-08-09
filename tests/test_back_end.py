@@ -53,22 +53,35 @@ class TestViews(TestBase):
 	def test_register_view(self):
 		response = self.client.get(url_for('register'))
 		self.assertEqual(response.status_code, 200)
-	# Test that register is accessible without login
+		self.assertIn(b"register", response.data)
+	
 	def test_login_view(self):	
 		response = self.client.get(url_for('login'))
 		self.assertEqual(response.status_code, 200)
+		self.assertIn(b"login", response.data)
 
 
 class TestViews(TestBase):
 	# Tests ensuring the correct pages load when user is logged in
 	def test_login_main_stock(self):
+			with self.client:
+			self.client.post(
+				url_for("login"),
+				data = dict(
+					email = "admin@admin.com",
+					password = "admin2016"
+				),
+				follow_redirects = True
+			)
 		response = self.client.get(url_for('main_stock'))
 		self.assertEqual(response.status_code, 200)
+		self.assertIn(b"main_stock", response1.data)
 		
 	
 	def test_login_updateProduct(self):
 		response = self.client.get(url_for('UpdateProduct'))
 		self.assertEqual(response.status_code, 200)
+		self.assertIn(b"login", response1.data)
 	
 	def test_login_updateStock(self):
 		response = self.client.get(url_for('UpdateStock'))
