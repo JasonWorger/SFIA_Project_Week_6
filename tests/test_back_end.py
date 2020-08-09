@@ -33,9 +33,27 @@ class TestBase(TestCase):
 		hashed_pw_2 = bcrypt.generate_password_hash('test2016')
 		employee = Users(first_name="test", last_name="user", email="test@user.com", password=hashed_pw_2)
 
+		# Creating a test product
+		testproduct = Product(
+			product_id = 1,
+			product_name = "Water",
+			product_category = "Soft",
+			price = 2.00,
+			size = 500
+		)
+
+		#Creating a test stock
+		teststock = Stock(
+			id = 1,
+			product_id = 1,
+			quantity = 5
+		)
+
 		# save users to database
 		db.session.add(admin)
 		db.session.add(employee)
+		db.session.add(testproduct)
+		db.session.add(teststock)
 		db.session.commit()
 		
 
@@ -88,7 +106,7 @@ class TestProductPages(TestBase):
 				),
 				follow_redirects = True
 			)
-		response = self.client.get(url_for('UpdateProduct'))
+		response = self.client.get(url_for('/updateProduct/1'))
 		self.assertEqual(response.status_code, 200)
 		self.assertIn(b"Update Product", response.data)
 	
